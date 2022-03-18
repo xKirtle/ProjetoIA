@@ -31,10 +31,10 @@ public class BFS extends SearchAlgorithm {
             int currentNodeIndex = Integer.parseInt(currentNode.getLabel()) - 1;
             if (visitedNodes[currentNodeIndex]) continue;
             visitedNodes[currentNodeIndex] = true;
-            
-            for (int i = 0; i < adjacentEdges.size(); i++) {
-                Node nodeToAdd = adjacentEdges.get(i).getN1();
-                
+
+            for (Edge adjacentEdge : adjacentEdges) {
+                Node nodeToAdd = adjacentEdge.getN1();
+
                 int nodeToAddIndex = Integer.parseInt(nodeToAdd.getLabel()) - 1;
                 nodeParent[nodeToAddIndex] = currentNode;
 
@@ -42,7 +42,7 @@ public class BFS extends SearchAlgorithm {
                     finalFound = true;
                     break;
                 }
-                
+
                 queue.add(nodeToAdd);
             }
             
