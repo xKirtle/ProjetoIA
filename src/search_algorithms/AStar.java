@@ -26,17 +26,14 @@ public class AStar extends SearchAlgorithm {
         ArrayList<Node> unvisited = nodeSet.stream()
                 .sorted(Comparator.comparingInt(n -> Integer.parseInt(n.getLabel())))
                 .collect(Collectors.toCollection(ArrayList<Node>::new));
-        ArrayList<Node> visited = new ArrayList<Node>();
         Node[] nodeParent = new Node[graph.numberOfNodes()];
         
         //Setting all nodes at max cost, we'll keep the lowest later
         unvisited.forEach(n -> n.setCost(Integer.MAX_VALUE));
         
         Node currentNode = n_initial;
-        unvisited.get(Integer.parseInt(currentNode.getLabel())- 1).setCost(0);
+        unvisited.get(Integer.parseInt(currentNode.getLabel()) - 1).setCost(0);
         while (!unvisited.isEmpty()) {
-            int currentNodeIndex = Integer.parseInt(currentNode.getLabel()) - 1; 
-            
             List<Edge> adjacentEdges = graph.getAdjacencyList().get(currentNode);
             if (adjacentEdges != null) {
                 for (Edge edge : adjacentEdges) {
@@ -50,7 +47,6 @@ public class AStar extends SearchAlgorithm {
                 }
             }
             unvisited.remove(currentNode);
-            visited.add(currentNode);
             
             //out of all unvisited nodes, select the one with the smallest f to visit
             Node tempNode = currentNode;
